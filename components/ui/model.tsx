@@ -63,6 +63,7 @@ const Modal: React.FC<ModalProps> = ({
                 {showFooter && (
                     <DialogFooter>
                         <Button
+                            className='cursor-pointer'
                             variant="outline"
                             onClick={onClose}
                         >
@@ -70,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({
                         </Button>
                         {onSubmit && (
                             <Button
-                                className='bg-indigo-400 hover:bg-indigo-500 text-white'
+                                className='bg-indigo-400 cursor-pointer hover:bg-indigo-500 text-white'
                                 onClick={handleSubmit}
                             >
                                 {submitText}

@@ -1,10 +1,10 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
 import Modal from "@/components/ui/model";
 import { useCreateWorkspace } from "@/module/workspaces/hooks/workspace";
 import React, { useState } from "react";
 import { toast } from "sonner";
-
 
 const CreateWorkspace = ({
     isModalOpen,
@@ -17,15 +17,19 @@ const CreateWorkspace = ({
     const { mutateAsync, isPending } = useCreateWorkspace();
 
     const handleSubmit = async () => {
-        if (!name.trim()) return;
+        if (!name.trim()) {
+            toast.warning("Workspace name is required.");
+            setName("");
+            return;
+        }
         try {
             await mutateAsync(name);
             toast.success("Workspace created successfully");
             setName("");
             setIsModalOpen(false);
         } catch (err) {
+            setName("");
             toast.error("Failed to create workspace");
-            console.error("Failed to create workspace:", err);
         }
     };
 
@@ -34,13 +38,13 @@ const CreateWorkspace = ({
             title="Add New Workspace"
             description="Create a new workspace to organize your projects"
             isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            onClose={() => { setIsModalOpen(false); setName(""); }}
             onSubmit={handleSubmit}
             submitText={isPending ? "Creating..." : "Create Workspace"}
             submitVariant="default"
         >
             <div className="space-y-4">
-                <input
+                <Input
                     className="w-full p-2 border rounded"
                     placeholder="Workspace name..."
                     value={name}

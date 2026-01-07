@@ -97,7 +97,6 @@ export async function createWorkspaces(name: string) {
 
 
 export const getWorkspaceById = async (id: string) => {
-
     const workspace = await db.workspace.findUnique({
         where: { id },
         include: {

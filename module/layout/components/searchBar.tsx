@@ -40,8 +40,8 @@ const SearchBar = () => {
                     <span className='text-xs text-left' >Search</span>
                 </span>
                 <span className="flex space-x-1">
-                    <kbd className="px-1 py-0.5 mt-0.5 text-xs border rounded">Ctrl</kbd>
-                    <kbd className="px-1 py-0.5 mt-0.5 text-xs border rounded">K</kbd>
+                    <kbd className="px-1 py-0.5 mt-1 text-xs border rounded">Ctrl</kbd>
+                    <kbd className="px-1 py-0.5 mt-1 text-xs border rounded">K</kbd>
                 </span>
             </button>
 

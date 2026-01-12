@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/resizable";
 import TabbedSidebar from "@/module/collections/components/side-bar";
 import { useWorkspaceStore } from "@/module/layout/store";
+import RequestPlayground from "@/module/request/components/request-playground";
 import { useGetWorkspace } from "@/module/workspaces/hooks/workspace";
 // import RequestPlayground from "@/modules/request/components/request-playground";
 
@@ -30,8 +31,7 @@ const Page = () => {
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel defaultSize={65} minSize={40}>
-        {/* <RequestPlayground /> */}
-        <h1>Playground</h1>
+        <RequestPlayground />
       </ResizablePanel>
 
       <ResizableHandle withHandle />

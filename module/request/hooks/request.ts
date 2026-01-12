@@ -6,16 +6,17 @@ import {
     run,
     saveRequest,
 } from "../actions";
+import { useRequestPlaygroundStore } from "../store/useRequestStore";
 
 export function useAddRequestToCollection(collectionId: string) {
     const queryClient = useQueryClient();
-    //   const { updateTabFromSavedRequest, activeTabId } = useRequestPlaygroundStore();
+    const { updateTabFromSavedRequest, activeTabId } = useRequestPlaygroundStore();
     return useMutation({
         mutationFn: async (value: Request) => addRequestToCollection(collectionId, value),
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["requests", collectionId] });
             // @ts-ignore
-            // updateTabFromSavedRequest(activeTabId!, data);
+            updateTabFromSavedRequest(activeTabId!, data);
         },
     });
 }
@@ -29,7 +30,7 @@ export function useGetAllRequestFromCollection(collectionId: string) {
 }
 
 export function useSaveRequest(id: string) {
-    //  const { updateTabFromSavedRequest, activeTabId } = useRequestPlaygroundStore();
+    const { updateTabFromSavedRequest, activeTabId } = useRequestPlaygroundStore();
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -38,21 +39,21 @@ export function useSaveRequest(id: string) {
             queryClient.invalidateQueries({ queryKey: ["requests"] });
 
             // @ts-ignore
-            // updateTabFromSavedRequest(activeTabId!, data);
+            updateTabFromSavedRequest(activeTabId!, data);
         },
     });
 }
 
 
-// export function useRunRequest(requestId: string) {
+export function useRunRequest(requestId: string) {
 
-//   const {setResponseViewerData} = useRequestPlaygroundStore();
-//   const queryClient = useQueryClient();
-//   return useMutation({
-//     mutationFn: async () => await run(requestId),
-//     onSuccess: (data) => {
-//       queryClient.invalidateQueries({ queryKey: ["requests"] });
-//       setResponseViewerData(data);
-//     },
-//   });
-// }
+    const { setResponseViewerData } = useRequestPlaygroundStore();
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async () => await run(requestId),
+        onSuccess: (data: any) => {
+            queryClient.invalidateQueries({ queryKey: ["requests"] });
+            setResponseViewerData(data);
+        },
+    });
+}
